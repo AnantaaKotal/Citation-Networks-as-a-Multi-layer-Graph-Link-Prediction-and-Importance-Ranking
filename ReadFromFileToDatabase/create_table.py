@@ -1,0 +1,58 @@
+
+import MySQLdb
+
+def create_table(table_name,sql):
+	db = MySQLdb.connect("localhost","root","Fish_7735","TESTDB" )
+
+	cursor = db.cursor()
+	cursor.execute("DROP TABLE IF EXISTS %s" % (table_name))
+	cursor.execute(sql)
+
+	db.close()
+
+
+table="AUTHOR"
+s="""CREATE TABLE AUTHOR (
+        	 AUTHOR_NAME  CHAR(45) NOT NULL UNIQUE,
+		 AUTHOR_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY)"""
+create_table(table,s)
+
+
+table="PAPER"
+s="""CREATE TABLE PAPER (
+        	PAPER_ID CHAR(20) PRIMARY KEY NOT NULL,
+		PAPER_NO CHAR(20),
+		TITLE VARCHAR(256))"""
+create_table(table,s)
+
+table="PAPER_AUTHOR"
+s="""CREATE TABLE PAPER_AUTHOR(
+		AUTHOR_NAME CHAR(45) NOT NULL,
+		AUTHOR_ID INT,
+		PAPER_NAME VARCHAR(256) NOT NULL,
+		PAPER_ID CHAR(20),
+		PRIMARY KEY(AUTHOR_NAME,PAPER_NAME),
+		FOREIGN KEY(AUTHOR_ID) REFERENCES AUTHOR(AUTHOR_ID)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE)"""
+create_table(table,s)
+
+
+table="AUTHOR_AUTHOR"
+s="""CREATE TABLE AUTHOR_AUTHOR(
+		PAPER_ID CHAR(20),
+		AUTHOR_A_ID INT,
+		AUTHOR_A CHAR(45),
+		AUTHOR_B_ID INT,
+		AUTHOR_B CHAR(45))"""
+create_table(table,s)
+
+
+
+
+
+
+
+
+
+
