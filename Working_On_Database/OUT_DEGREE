@@ -1,0 +1,5 @@
+INSERT Into TESTDB.OUT_DEGREE
+
+SELECT FromPaperID, count(*) AS OUT_DEGREE 
+FROM TESTDB.PaperCitation
+GROUP BY FromPaperID

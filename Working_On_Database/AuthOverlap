@@ -1,0 +1,6 @@
+insert into TESTDB.AUTH_OVERLAP
+
+SELECT FromPaperID, ToPaperID, count(*) as AUTH_OVERLAP
+From TESTDB.AUTHOR_CITE 
+WHERE NEW_AUTHOR_ID=OLD_AUTHOR_ID
+group by FromPaperID, ToPaperID

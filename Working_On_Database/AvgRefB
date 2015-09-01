@@ -1,0 +1,8 @@
+insert into TESTDB.AvgRefB
+
+SELECT A.FromPaperID, A.MEAN_REF 
+FROM TESTDB.AvgRefA AS A
+INNER JOIN TESTDB.PaperCitation as B
+ON A.FromPaperID=B.ToPaperID
+GROUP BY A.FromPaperID
+
